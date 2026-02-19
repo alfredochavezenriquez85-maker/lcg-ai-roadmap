@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600">
+<title>AI Roadmap — Automatización de Procesos y Decisiones | London Consulting Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #13131a;
+  --surface2: #1a1a24;
+  --border: #2a2a3a;
+  --text: #e8e8f0;
+  --text-dim: #8888a0;
+  --accent-orange: #ff6b2b;
+  --accent-amber: #ffb547;
+  --accent-cyan: #00d4ff;
+  --accent-green: #34d399;
+  --accent-purple: #a78bfa;
+  --accent-pink: #f472b6;
+  --n0: #3b3b4f;
+  --n1: #4a4520;
+  --n2: #1e3a5f;
+  --n3: #1a4a2e;
+  --n4: #3a1a4a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+.noise {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999;
+}
+
+.container { max-width: 1500px; margin: 0 auto; padding: 40px 50px 80px; position: relative; }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 0 50px;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,107,43,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.badge {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+  border: 1px solid rgba(255,107,43,0.3);
+  padding: 8px 24px;
+  border-radius: 100px;
+  margin-bottom: 30px;
+  animation: fadeIn 0.8s ease;
+}
+.hero h1 {
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  animation: slideUp 0.8s ease;
+}
+.hero h1 span { color: var(--accent-orange); }
+.hero p {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text-dim);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  animation: slideUp 0.8s ease 0.1s both;
+}
+
+/* KEY INSIGHT BOX */
+.insight-box {
+  background: linear-gradient(135deg, rgba(255,107,43,0.08), rgba(255,181,71,0.05));
+  border: 1px solid rgba(255,107,43,0.2);
+  border-radius: 20px;
+  padding: 40px 50px;
+  margin: 40px 0 60px;
+  text-align: center;
+  animation: slideUp 0.8s ease 0.2s both;
+}
+.insight-box .label {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+  margin-bottom: 16px;
+}
+.insight-box p {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.insight-box p strong { color: var(--accent-orange); }
+
+/* SECTION */
+.section-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+}
+.section-heading {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 18px;
+  color: var(--text-dim);
+  font-weight: 300;
+  margin-bottom: 50px;
+  max-width: 700px;
+}
+
+/* MATRIX GRID */
+.matrix { margin-bottom: 80px; }
+
+.matrix-header {
+  display: grid;
+  grid-template-columns: 64px 220px 240px 1fr 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.col-head.level-col {
+  background: var(--surface2);
+  color: var(--text-dim);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px 0 0 12px;
+}
+.col-head.desc-col { background: rgba(255,255,255,0.04); color: var(--text); }
+.col-head.digital { background: rgba(0,212,255,0.08); color: var(--accent-cyan); }
+.matrix-header .col-head {
+  padding: 20px 24px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 12px 12px 0 0;
+}
+.col-head.infra { background: var(--surface2); color: var(--text-dim); font-size: 14px; }
+.col-head.copilot { background: rgba(255,181,71,0.12); color: var(--accent-amber); }
+.col-head.agentic { background: rgba(255,107,43,0.12); color: var(--accent-orange); }
+.col-head.multi { background: rgba(167,139,250,0.12); color: var(--accent-purple); }
+.col-head .emoji { font-size: 28px; display: block; margin-bottom: 6px; }
+.col-head .sublabel { font-size: 11px; font-weight: 400; color: var(--text-dim); margin-top: 4px; display: block; }
+
+.level-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border-radius: 12px 0 0 12px;
+  padding: 16px 8px;
+}
+.level-badge.n0 { background: linear-gradient(180deg, #1a1a2e, #16213e); color: #6b7280; }
+.level-badge.n1 { background: linear-gradient(180deg, #1a1f0e, #2a2f1e); color: #a3a33a; }
+.level-badge.n2 { background: linear-gradient(180deg, #0e1a2e, #1a2a4e); color: #60a5fa; }
+.level-badge.n3 { background: linear-gradient(180deg, #0e1f15, #1a3a2e); color: #34d399; }
+.level-badge.n4 { background: linear-gradient(180deg, #1f0e2e, #2a1a3e); color: #a78bfa; }
+
+.matrix-row {
+  display: grid;
+  grid-template-columns: 64px 220px 240px 1fr 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+  animation: slideUp 0.6s ease both;
+}
+.matrix-row:nth-child(2) { animation-delay: 0.1s; }
+.matrix-row:nth-child(3) { animation-delay: 0.15s; }
+.matrix-row:nth-child(4) { animation-delay: 0.2s; }
+.matrix-row:nth-child(5) { animation-delay: 0.25s; }
+.matrix-row:nth-child(6) { animation-delay: 0.3s; }
+
+.level-label {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12px 0 0 12px;
+}
+.level-label .level-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+.level-label .level-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 6px;
+  line-height: 1.3;
+}
+.level-label .level-tech {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.n0-bg { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+.n0-bg .level-num { color: #6b7280; }
+.n1-bg { background: linear-gradient(135deg, #1a1f0e, #2a2f1e); }
+.n1-bg .level-num { color: #a3a33a; }
+.n2-bg { background: linear-gradient(135deg, #0e1a2e, #1a2a4e); }
+.n2-bg .level-num { color: #60a5fa; }
+.n3-bg { background: linear-gradient(135deg, #0e1f15, #1a3a2e); }
+.n3-bg .level-num { color: #34d399; }
+.n4-bg { background: linear-gradient(135deg, #1f0e2e, #2a1a3e); }
+.n4-bg .level-num { color: #a78bfa; }
+
+.matrix-cell {
+  background: var(--surface);
+  padding: 20px 22px;
+  position: relative;
+  transition: transform 0.2s, background 0.2s;
+}
+.matrix-cell:hover {
+  transform: scale(1.01);
+  z-index: 2;
+}
+.matrix-cell:last-child { border-radius: 0 12px 12px 0; }
+
+.digital-cell {
+  background: rgba(0,212,255,0.03);
+  padding: 20px 22px;
+  position: relative;
+  border: 1px solid rgba(0,212,255,0.06);
+  transition: transform 0.2s;
+}
+.digital-cell:hover { transform: scale(1.01); z-index: 2; }
+.digital-cell .digi-stage {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.digital-cell .digi-stack {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+.digital-cell .digi-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(0,212,255,0.1);
+  overflow: hidden;
+  margin-top: 10px;
+}
+.digital-cell .digi-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+}
+
+.matrix-cell .status {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.status.yes { color: var(--accent-green); }
+.status.limited { color: var(--accent-amber); }
+.status.no { color: #6b7280; }
+
+.matrix-cell .desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+.matrix-cell .tool-tag {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-top: 10px;
+  margin-right: 4px;
+  color: var(--text-dim);
+}
+
+/* MODELS SECTION */
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 80px;
+}
+
+.model-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 30px;
+  transition: border-color 0.3s, transform 0.2s;
+  animation: slideUp 0.6s ease both;
+}
+.model-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+.model-card .provider {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.model-card .model-name {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.model-card .tier {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+.model-card .strength {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+.model-card .meta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.model-card .meta-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.anthropic .provider { color: var(--accent-orange); }
+.anthropic .model-name { color: #fff; }
+.openai .provider { color: var(--accent-cyan); }
+.openai .model-name { color: #fff; }
+.google .provider { color: var(--accent-green); }
+.google .model-name { color: #fff; }
+.meta .provider { color: var(--accent-purple); }
+.meta .model-name { color: #fff; }
+.mistral .provider { color: var(--accent-pink); }
+.mistral .model-name { color: #fff; }
+
+/* PARADIGM SHIFT */
+.paradigm {
+  background: linear-gradient(135deg, var(--surface), var(--surface2));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 60px;
+  margin-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.paradigm::after {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,107,43,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.paradigm .cols {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  align-items: start;
+}
+.paradigm .col h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.paradigm .col ul {
+  list-style: none;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--text-dim);
+}
+.paradigm .col ul li::before {
+  content: '→ ';
+  color: var(--accent-orange);
+  font-weight: 700;
+}
+.paradigm .arrow-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: var(--accent-orange);
+  padding-top: 40px;
+}
+.old h3 { color: #6b7280; }
+.new h3 { color: var(--accent-orange); }
+
+/* EXAMPLES */
+.examples {
+  margin-bottom: 80px;
+}
+.example-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.example-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  animation: slideUp 0.6s ease both;
+}
+.example-card .ex-level {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+}
+.example-card h4 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.example-card .before-after {
+  margin-top: 16px;
+}
+.example-card .ba-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.ba-before .ba-label { color: #6b7280; }
+.ba-after .ba-label { color: var(--accent-green); }
+.example-card .ba-text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+.ba-before .ba-text { background: rgba(107,114,128,0.08); }
+.ba-after .ba-text { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); }
+.ba-before { margin-bottom: 12px; }
+
+/* NAV BAR */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.nav-bar .nav-logo {
+  height: 28px;
+  filter: brightness(1.1);
+}
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+}
+.nav-tab {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  padding: 16px 24px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.25s;
+}
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active {
+  color: var(--accent-orange);
+}
+.nav-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--accent-orange);
+  border-radius: 2px 2px 0 0;
+}
+.nav-tab .tab-num {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 10px;
+  margin-right: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  vertical-align: middle;
+}
+.nav-tab.active .tab-num {
+  background: rgba(255,107,43,0.15);
+  border-color: rgba(255,107,43,0.3);
+  color: var(--accent-orange);
+}
+
+/* PAGE VISIBILITY */
+.page { display: none; }
+.page.active { display: block; }
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.footer p {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+/* AI 101 SECTION */
+.page-break {
+  border-top: 2px solid var(--accent-orange);
+  margin: 100px 0 80px;
+  position: relative;
+}
+.page-break::after {
+  content: 'PÁGINA 2';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg);
+  padding: 0 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent-orange);
+}
+
+.ai101-hero {
+  text-align: center;
+  padding: 20px 0 50px;
+}
+.ai101-hero h2 {
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.ai101-hero h2 span { color: var(--accent-cyan); }
+.ai101-hero p {
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text-dim);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* WHAT IS AI */
+.what-is-ai {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 70px;
+}
+.wia-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+}
+.wia-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.wia-card p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+.wia-card .analogy {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: rgba(0,212,255,0.04);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: 0 10px 10px 0;
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.6;
+}
+.wia-card .analogy strong { color: var(--accent-cyan); }
+
+/* CONCEPTS GRID */
+.concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 70px;
+}
+.concept-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 30px;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.concept-card:hover {
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+.concept-card .concept-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.concept-card h4 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.concept-card .en-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+.concept-card .concept-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+.concept-card .concept-analogy {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.concept-card .concept-analogy strong { color: var(--accent-amber); }
+
+.c-cyan .concept-num, .c-cyan h4 { color: var(--accent-cyan); }
+.c-orange .concept-num, .c-orange h4 { color: var(--accent-orange); }
+.c-amber .concept-num, .c-amber h4 { color: var(--accent-amber); }
+.c-green .concept-num, .c-green h4 { color: var(--accent-green); }
+.c-purple .concept-num, .c-purple h4 { color: var(--accent-purple); }
+.c-pink .concept-num, .c-pink h4 { color: var(--accent-pink); }
+
+/* AI TYPES */
+.ai-types-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 70px;
+}
+.ai-type-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+}
+.ai-type-card .type-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+.ai-type-card h4 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.ai-type-card p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+.ai-type-card .use-cases {
+  margin-top: 14px;
+  text-align: left;
+}
+.ai-type-card .use-case {
+  font-size: 12px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+.ai-type-card .use-case strong { color: var(--text); }
+
+/* IGSA USE CASES PAGE */
+.uc-area-section {
+  margin-bottom: 50px;
+}
+.uc-area-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.uc-area-header .area-icon {
+  font-size: 32px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+.uc-area-header h3 {
+  font-size: 22px;
+  font-weight: 700;
+}
+.uc-area-header .area-count {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin-left: auto;
+  background: var(--surface2);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.uc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.uc-card:hover { border-color: rgba(255,255,255,0.1); }
+
+.uc-card-header {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+}
+.uc-card-header:hover { background: rgba(255,255,255,0.02); }
+
+.uc-process-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  padding: 6px 0;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+}
+
+.uc-process-name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.uc-process-name .uc-sub {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.uc-ai-badges {
+  display: flex;
+  gap: 6px;
+}
+.uc-ai-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.uc-ai-badge.copilot { background: rgba(255,181,71,0.12); color: var(--accent-amber); }
+.uc-ai-badge.agentic { background: rgba(255,107,43,0.12); color: var(--accent-orange); }
+.uc-ai-badge.multi { background: rgba(167,139,250,0.12); color: var(--accent-purple); }
+
+.uc-card-body {
+  display: none;
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--border);
+}
+.uc-card.open .uc-card-body { display: block; padding-top: 20px; }
+.uc-card.open { border-color: rgba(255,107,43,0.3); }
+
+.uc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.uc-block {
+  padding: 16px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.uc-block.as-is {
+  background: rgba(107,114,128,0.08);
+  border: 1px solid rgba(107,114,128,0.12);
+}
+.uc-block.to-be {
+  background: rgba(0,212,255,0.04);
+  border: 1px solid rgba(0,212,255,0.1);
+}
+.uc-block.ai-opp {
+  background: rgba(255,107,43,0.05);
+  border: 1px solid rgba(255,107,43,0.12);
+  grid-column: 1 / -1;
+}
+.uc-block-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.uc-block.as-is .uc-block-label { color: #6b7280; }
+.uc-block.to-be .uc-block-label { color: var(--accent-cyan); }
+.uc-block.ai-opp .uc-block-label { color: var(--accent-orange); }
+
+.uc-block .uc-content { color: var(--text-dim); }
+.uc-block .uc-content strong { color: var(--text); }
+
+.uc-tool-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.uc-impact {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+.uc-impact-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(52,211,153,0.08);
+  color: var(--accent-green);
+  letter-spacing: 0.5px;
+}
+
+.uc-summary-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 50px;
+}
+.uc-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+}
+.uc-stat .stat-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.uc-stat .stat-label {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- STICKY NAV -->
+<div class="nav-bar">
+  <img src="https://londoncg.com/hs-fs/hubfs/Logo4%20(1).png?width=180&height=71&name=Logo4%20(1).png" alt="London Consulting Group" class="nav-logo">
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('roadmap', this)"><span class="tab-num">01</span>AI Roadmap</button>
+    <button class="nav-tab" onclick="showPage('ai101', this)"><span class="tab-num">02</span>¿Qué es la IA?</button>
+    <button class="nav-tab" onclick="showPage('igsa', this)"><span class="tab-num">03</span>IGSA — Use Cases</button>
+  </div>
+  <div style="font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--text-dim);">LCG DIGITAL · 2026</div>
+</div>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- PAGE 1: AI ROADMAP -->
+<!-- ============================================================ -->
+<div id="page-roadmap" class="page active">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">AI Roadmap · Automatización de Procesos y Decisiones</div>
+  <h1><span>AI Roadmap</span><br>Automatización de<br>Procesos y Decisiones</h1>
+  <p>Matriz de madurez actualizada con capas de IA transversales.<br>La IA ya no es el último nivel — es una capa que aplica <strong>desde el día uno</strong>.</p>
+</div>
+
+<!-- KEY INSIGHT -->
+<div class="insight-box">
+  <div class="label">💡 Cambio de paradigma</div>
+  <p>La IA Aplicada y <strong>Agentic AI</strong> no son "el siguiente nivel" de automatización.<br>Son <strong>capas transversales</strong> que pueden aplicarse en <strong>cualquier nivel de madurez</strong>,<br>incluso en procesos 100% manuales y on-premise.</p>
+</div>
+
+<!-- MATRIX -->
+<div class="matrix">
+  <div class="section-title">01 — Matriz principal</div>
+  <div class="section-heading">Madurez Digital × Automatización × Capas de IA</div>
+  <div class="section-sub">De izquierda a derecha: dónde está la organización, cómo automatiza, y cómo la IA potencia cada nivel.</div>
+
+  <div class="matrix-header">
+    <div class="col-head level-col">Nivel</div>
+    <div class="col-head digital"><span class="emoji">📊</span>Madurez Digital<span class="sublabel">Sistemas, datos y tecnología</span></div>
+    <div class="col-head infra">Nivel de<br>Automatización<span class="sublabel">Cómo se ejecutan los procesos</span></div>
+    <div class="col-head copilot"><span class="emoji">🤖</span>IA Aplicada (Copilots)<span class="sublabel">Asiste y genera</span></div>
+    <div class="col-head agentic"><span class="emoji">🧠</span>Agentic AI<span class="sublabel">Planifica y ejecuta</span></div>
+    <div class="col-head multi"><span class="emoji">🔗</span>Multi-Agente<span class="sublabel">Colaboran entre sí</span></div>
+  </div>
+
+  <!-- N0 -->
+  <div class="matrix-row">
+    <div class="level-badge n0">NIVEL 00</div>
+    <div class="digital-cell" style="border-radius: 0;">
+      <div class="digi-stage">📄 Papel + Excel</div>
+      <div class="digi-stack">Hojas de cálculo, documentos impresos, correo electrónico como sistema central. Sin base de datos. Datos en silos personales.</div>
+      <span class="tool-tag">Excel</span><span class="tool-tag">Email</span><span class="tool-tag">Papel</span>
+      <div class="digi-bar"><div class="digi-bar-fill" style="width: 10%;"></div></div>
+    </div>
+    <div class="matrix-cell" style="background: var(--surface2);">
+      <div class="desc" style="font-size: 14px; color: var(--text); line-height: 1.6;">Procesos <strong>100% manuales</strong>. Toda la operación depende de personas: copiar datos, enviar correos, llenar formatos. Cero trazabilidad, alto riesgo de error.</div>
+      <span class="tool-tag" style="color: #6b7280;">Sin automatización</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Claude/GPT redacta correos, resume docs, genera reportes desde datos pegados en chat. Sin infraestructura.</div>
+      <span class="tool-tag">Claude.ai</span><span class="tool-tag">ChatGPT</span><span class="tool-tag">Gemini</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Cowork automatiza archivos en escritorio: renombra, organiza, extrae datos de PDFs, llena plantillas. Computer Use opera cualquier app.</div>
+      <span class="tool-tag">Cowork</span><span class="tool-tag">Computer Use</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status limited">⚠️ Limitado</div>
+      <div class="desc">Posible con agents locales que orquestan tareas de escritorio. Requiere setup técnico.</div>
+      <span class="tool-tag">LangGraph</span><span class="tool-tag">Custom</span>
+    </div>
+  </div>
+
+  <!-- N1 -->
+  <div class="matrix-row">
+    <div class="level-badge n1">NIVEL 01</div>
+    <div class="digital-cell" style="border-radius: 0;">
+      <div class="digi-stage">💾 Repositorios digitales</div>
+      <div class="digi-stack">Archivos en la nube (Drive, SharePoint). Firmas electrónicas. OCR básico. Datos centralizados pero sin estructura relacional.</div>
+      <span class="tool-tag">Google Drive</span><span class="tool-tag">SharePoint</span><span class="tool-tag">OCR</span>
+      <div class="digi-bar"><div class="digi-bar-fill" style="width: 25%;"></div></div>
+    </div>
+    <div class="matrix-cell" style="background: var(--surface2);">
+      <div class="desc" style="font-size: 14px; color: var(--text); line-height: 1.6;">Papel convertido a <strong>digital</strong>. Repositorios centralizados, firmas electrónicas, OCR básico. Pero el flujo y seguimiento <strong>sigue siendo manual</strong>.</div>
+      <span class="tool-tag" style="color: #a3a33a;">Digitalización sin flujo</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">IA clasifica docs subidos, extrae datos clave de contratos, genera resúmenes automáticos de archivos en Drive.</div>
+      <span class="tool-tag">Azure Doc AI</span><span class="tool-tag">Google Doc AI</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Agente monitorea carpeta, clasifica docs nuevos, extrae datos, actualiza tracker y notifica por Slack/email.</div>
+      <span class="tool-tag">Claude + Drive</span><span class="tool-tag">Cowork</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status limited">⚠️ Limitado</div>
+      <div class="desc">Agente 1 clasifica + Agente 2 extrae + Agente 3 valida. Posible pero over-engineered aquí.</div>
+      <span class="tool-tag">CrewAI</span>
+    </div>
+  </div>
+
+  <!-- N2 -->
+  <div class="matrix-row">
+    <div class="level-badge n2">NIVEL 02</div>
+    <div class="digital-cell" style="border-radius: 0;">
+      <div class="digi-stage">🖥️ ERP / Sistemas core</div>
+      <div class="digi-stack">Sistemas transaccionales (ERP, CRM, WMS) on-premise o early cloud. Datos estructurados pero en silos funcionales. Reporteo manual o básico.</div>
+      <span class="tool-tag">SAP</span><span class="tool-tag">Oracle</span><span class="tool-tag">Dynamics</span><span class="tool-tag">CRM</span>
+      <div class="digi-bar"><div class="digi-bar-fill" style="width: 45%;"></div></div>
+    </div>
+    <div class="matrix-cell" style="background: var(--surface2);">
+      <div class="desc" style="font-size: 14px; color: var(--text); line-height: 1.6;"><strong>Robots (RPA)</strong> que replican acciones humanas en interfaces. Ejecutan reglas predefinidas, paso a paso. Frágiles ante cambios de UI.</div>
+      <span class="tool-tag" style="color: #60a5fa;">Automatización por tareas</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">RPA + LLM: bot que antes fallaba con variaciones ahora usa IA para interpretar antes de actuar. "Intelligent Automation".</div>
+      <span class="tool-tag">UiPath AI Center</span><span class="tool-tag">AI Builder</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Agente decide QUÉ bot ejecutar según contexto, maneja excepciones que antes requerían humano, re-intenta con lógica adaptativa.</div>
+      <span class="tool-tag">Computer Use</span><span class="tool-tag">LangGraph</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Agente orquestador asigna tareas a bots RPA especializados, monitorea resultados, escala excepciones.</div>
+      <span class="tool-tag">AutoGen</span><span class="tool-tag">CrewAI</span>
+    </div>
+  </div>
+
+  <!-- N3 -->
+  <div class="matrix-row">
+    <div class="level-badge n3">NIVEL 03</div>
+    <div class="digital-cell" style="border-radius: 0;">
+      <div class="digi-stage">☁️ Cloud + Analytics</div>
+      <div class="digi-stack">ERP en la nube, BI/analytics (Power BI, Looker), dashboards operativos. Datos conectados entre áreas. KPIs en tiempo real.</div>
+      <span class="tool-tag">Cloud ERP</span><span class="tool-tag">Power BI</span><span class="tool-tag">Looker</span>
+      <div class="digi-bar"><div class="digi-bar-fill" style="width: 70%;"></div></div>
+    </div>
+    <div class="matrix-cell" style="background: var(--surface2);">
+      <div class="desc" style="font-size: 14px; color: var(--text); line-height: 1.6;"><strong>Orquestación end-to-end</strong> con reglas de negocio, aprobaciones, SLAs, escalamientos y trazabilidad completa. El proceso está diseñado y el sistema lo ejecuta.</div>
+      <span class="tool-tag" style="color: #34d399;">Workflows / BPM</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Nodos de IA dentro del workflow: clasificar solicitudes, generar borradores, priorizar tickets, analizar sentimiento.</div>
+      <span class="tool-tag">n8n + Claude</span><span class="tool-tag">Monday AI</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Agente como "worker" dentro del workflow: recibe tarea, investiga, genera entregable, lo pasa al siguiente paso.</div>
+      <span class="tool-tag">ServiceNow GenAI</span><span class="tool-tag">LangGraph</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Agentes especializados en cada etapa: intake → análisis → respuesta → QA. El workflow orquesta, los agentes ejecutan.</div>
+      <span class="tool-tag">CrewAI</span><span class="tool-tag">AutoGen</span><span class="tool-tag">MCP</span>
+    </div>
+  </div>
+
+  <!-- N4 -->
+  <div class="matrix-row">
+    <div class="level-badge n4">NIVEL 04</div>
+    <div class="digital-cell" style="border-radius: 0;">
+      <div class="digi-stage">🚀 Ecosistema integrado + Data Platform</div>
+      <div class="digi-stack">Plataforma de datos unificada. Data lake/warehouse. APIs como producto. Event-driven architecture. Gobernanza de datos madura.</div>
+      <span class="tool-tag">Snowflake</span><span class="tool-tag">Databricks</span><span class="tool-tag">APIs</span><span class="tool-tag">ML Ops</span>
+      <div class="digi-bar"><div class="digi-bar-fill" style="width: 95%;"></div></div>
+    </div>
+    <div class="matrix-cell" style="background: var(--surface2);">
+      <div class="desc" style="font-size: 14px; color: var(--text); line-height: 1.6;"><strong>Sistemas conectados nativamente</strong>. Los datos fluyen entre plataformas en tiempo real vía APIs, sin intervención humana. Arquitectura orientada a eventos.</div>
+      <span class="tool-tag" style="color: #a78bfa;">Integración APIs / iPaaS</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">IA para mapeo inteligente de campos entre sistemas, detección de anomalías, transformación semántica de payloads.</div>
+      <span class="tool-tag">Workato AI</span><span class="tool-tag">Make AI</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Agente que mantiene integraciones: detecta errores, reconfigura mappings, genera nuevos endpoints según necesidad.</div>
+      <span class="tool-tag">Claude MCP</span><span class="tool-tag">Custom Tools</span>
+    </div>
+    <div class="matrix-cell">
+      <div class="status yes">✅ SÍ</div>
+      <div class="desc">Ecosistema completo: Agente de datos + Agente de lógica + Agente de monitoreo + Agente de reporting.</div>
+      <span class="tool-tag">LangGraph</span><span class="tool-tag">Vertex AI</span><span class="tool-tag">MCP</span>
+    </div>
+  </div>
+</div>
+
+<!-- PARADIGM SHIFT -->
+<div class="paradigm">
+  <div class="section-title">02 — El cambio</div>
+  <div class="section-heading" style="margin-bottom:40px;">Antes vs. Ahora</div>
+  <div class="cols">
+    <div class="col old">
+      <h3>Visión Tradicional</h3>
+      <ul>
+        <li>Escalera secuencial: primero digitaliza, luego RPA, luego workflows</li>
+        <li>IA como "último piso" — solo si ya tienes todo lo demás</li>
+        <li>Automatización = reemplazar pasos manuales con reglas</li>
+        <li>Cada nivel requiere el anterior</li>
+        <li>Meses de implementación antes de ver valor</li>
+      </ul>
+    </div>
+    <div class="arrow-col">⟶</div>
+    <div class="col new">
+      <h3>Visión 2025-2026</h3>
+      <ul>
+        <li>IA es transversal: aplica desde el proceso más manual</li>
+        <li>Cowork/Computer Use opera sin infraestructura previa</li>
+        <li>Automatización = agentes que piensan, deciden y ejecutan</li>
+        <li>Puedes saltar niveles — un agente reemplaza un workflow completo</li>
+        <li>Valor en horas, no en meses</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- EXAMPLES -->
+<div class="examples">
+  <div class="section-title">03 — Ejemplos concretos</div>
+  <div class="section-heading">IA en cada nivel — Antes y Después</div>
+  <div class="section-sub">Casos reales de cómo la IA transforma cada nivel sin necesidad de migrar infraestructura.</div>
+
+  <div class="example-grid">
+    <div class="example-card">
+      <div class="ex-level">N0 — Manual</div>
+      <h4>Consolidar 50 facturas PDF en Excel</h4>
+      <div class="before-after">
+        <div class="ba-before"><div class="ba-label">❌ Sin IA</div><div class="ba-text">Empleado abre cada PDF, copia datos manualmente. 4-6 horas.</div></div>
+        <div class="ba-after"><div class="ba-label">✅ Con Agentic AI</div><div class="ba-text">Cowork procesa 50 PDFs, extrae datos, consolida en Excel. 10 minutos.</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="ex-level">N1 — Digitalización</div>
+      <h4>Clasificar contratos en Drive</h4>
+      <div class="before-after">
+        <div class="ba-before"><div class="ba-label">❌ Sin IA</div><div class="ba-text">Alguien lee cada contrato, extrae fechas y montos, actualiza tracker.</div></div>
+        <div class="ba-after"><div class="ba-label">✅ Con Agentic AI</div><div class="ba-text">Agente monitorea Drive, detecta doc nuevo, extrae datos, actualiza tracker, notifica.</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="ex-level">N2 — RPA</div>
+      <h4>Bot de descarga de reportes</h4>
+      <div class="before-after">
+        <div class="ba-before"><div class="ba-label">❌ RPA tradicional</div><div class="ba-text">Bot falla cuando cambia el UI del portal. Requiere reprogramar.</div></div>
+        <div class="ba-after"><div class="ba-label">✅ Con Agentic AI</div><div class="ba-text">Computer Use navega el portal visualmente, se adapta a cambios de UI sin reprogramar.</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="ex-level">N3 — Workflows</div>
+      <h4>Aprobación de compras</h4>
+      <div class="before-after">
+        <div class="ba-before"><div class="ba-label">❌ Solo reglas</div><div class="ba-text">4 niveles de aprobación para toda solicitud. Cuello de botella constante.</div></div>
+        <div class="ba-after"><div class="ba-label">✅ Con Agentic AI</div><div class="ba-text">Agente pre-aprueba si cumple políticas, escala solo excepciones. De 4 pasos a 1.</div></div>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="ex-level">N4 — APIs</div>
+      <h4>CRM → Facturación automática</h4>
+      <div class="before-after">
+        <div class="ba-before"><div class="ba-label">❌ Solo integración</div><div class="ba-text">Webhook crea factura. Si hay error de datos, se queda en cola hasta revisión manual.</div></div>
+        <div class="ba-after"><div class="ba-label">✅ Con Agentic AI</div><div class="ba-text">Agente valida datos, detecta discrepancias, las resuelve o escala — sin intervención.</div></div>
+      </div>
+    </div>
+    <div class="example-card" style="background: linear-gradient(135deg, rgba(255,107,43,0.08), rgba(255,107,43,0.03)); border-color: rgba(255,107,43,0.2);">
+      <div class="ex-level" style="color: var(--accent-orange);">CUALQUIER NIVEL</div>
+      <h4 style="color: var(--accent-orange);">La oportunidad</h4>
+      <div class="ba-after" style="margin-top: 16px;">
+        <div class="ba-text" style="background: rgba(255,107,43,0.06); border-color: rgba(255,107,43,0.15); font-size: 15px; line-height: 1.7;">
+          <strong>"No se necesita transformar toda la infraestructura para empezar a automatizar con IA. Un agente puede operar sobre la realidad actual — archivos, correos, Excel — y generar valor HOY."</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODELS SECTION -->
+<div>
+  <div class="section-title">04 — Modelos de IA en el mercado</div>
+  <div class="section-heading">¿Quién puede hacer qué?</div>
+  <div class="section-sub">Modelos frontier con capacidades agentic, tool use y cuándo usarlos.</div>
+
+  <div class="models-grid">
+    <div class="model-card anthropic">
+      <div class="provider">Anthropic</div>
+      <div class="model-name">Claude Opus 4.5 / 4.6</div>
+      <div class="tier">Frontier · 200K tokens</div>
+      <div class="strength">Razonamiento profundo, análisis complejo, instrucciones largas. Máxima capacidad agentic con Computer Use, MCP y Cowork.</div>
+      <div class="meta-row">
+        <span class="meta-tag">🧠 Agentic: Muy Alta</span>
+        <span class="meta-tag">🔧 Tool Use: Nativo + MCP</span>
+        <span class="meta-tag">N0 → N4</span>
+      </div>
+    </div>
+    <div class="model-card anthropic">
+      <div class="provider">Anthropic</div>
+      <div class="model-name">Claude Sonnet 4.5</div>
+      <div class="tier">High Performance · 200K tokens</div>
+      <div class="strength">Balance velocidad-calidad. Ideal para producción a escala, copilots y automatización en flujo.</div>
+      <div class="meta-row">
+        <span class="meta-tag">🧠 Agentic: Alta</span>
+        <span class="meta-tag">🔧 Tool Use: Nativo</span>
+        <span class="meta-tag">N0 → N4</span>
+      </div>
+    </div>
+    <div class="model-card openai">
+      <div class="provider">OpenAI</div>
+      <div class="model-name">GPT-4o</div>
+      <div class="tier">Frontier · 128K tokens</div>
+      <div class="strength">Multimodal (texto, imagen, audio, video). Gran versatilidad general y Assistants API robusta.</div>
+      <div class="meta-row">
+        <span class="meta-tag">🧠 Agentic: Alta</span>
+        <span class="meta-tag">🔧 Function Calling</span>
+        <span class="meta-tag">N0 → N4</span>
+      </div>
+    </div>
+    <div class="model-card openai">
+      <div class="provider">OpenAI</div>
+      <div class="model-name">o3 / o4-mini</div>
+      <div class="tier">Reasoning · 200K tokens</div>
+      <div class="strength">Chain-of-thought avanzado para lógica compleja, matemáticas y código. Menos orientado a agencia.</div>
+      <div class="meta-row">
+        <span class="meta-tag">🧠 Agentic: Baja</span>
+        <span class="meta-tag">🔧 Limitado</span>
+        <span class="meta-tag">Casos específicos</span>
+      </div>
+    </div>
+    <div class="model-card google">
+      <div class="provider">Google</div>
+      <div class="model-name">Gemini 2.5 Pro</div>
+      <div class="tier">Frontier · 1M tokens</div>
+      <div class="strength">Context window masivo. Ideal para documentos largos y análisis extenso. Integración nativa con Google Workspace.</div>
+      <div class="meta-row">
+        <span class="meta-tag">🧠 Agentic: Alta</span>
+        <span class="meta-tag">🔧 Vertex Agent Builder</span>
+        <span class="meta-tag">N0 → N4</span>
+      </div>
+    </div>
+    <div class="model-card meta">
+      <div class="provider">Meta</div>
+      <div class="model-name">Llama 3.3 70B</div>
+      <div class="tier">Open Source · 128K tokens</div>
+      <div class="strength">Sin costo de licencia. Deployable on-premise, fine-tunable. Ideal para privacidad y personalización.</div>
+      <div class="meta-row">
+        <span class="meta-tag">🧠 Agentic: Media</span>
+        <span class="meta-tag">🔧 Con frameworks</span>
+        <span class="meta-tag">N0 (local) → N4</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div> <!-- end page-roadmap -->
+
+<!-- ============================================================ -->
+<!-- PAGE 2: AI 101 — GUÍA PARA NO TÉCNICOS -->
+<!-- ============================================================ -->
+<div id="page-ai101" class="page">
+
+<div class="ai101-hero">
+  <div class="badge">Guía esencial para tomadores de decisión</div>
+  <h2>¿Qué es la <span>Inteligencia Artificial</span>?</h2>
+  <p>Todo lo que necesitas saber para entender la IA, sus conceptos clave y cómo se aplica en las empresas — explicado sin jerga técnica.</p>
+</div>
+
+<!-- QUE ES LA IA -->
+<div class="what-is-ai">
+  <div class="wia-card">
+    <h3 style="color: var(--accent-cyan);">La definición simple</h3>
+    <p>La Inteligencia Artificial es <strong>software que puede aprender patrones a partir de datos y tomar decisiones o generar contenido</strong> sin que alguien le programe cada paso específico.</p>
+    <p style="margin-top: 14px;">A diferencia de un programa tradicional (que hace exactamente lo que le dices), la IA aprende de ejemplos y generaliza. No "piensa" como un humano, pero puede hacer cosas que antes solo un humano podía hacer: leer, escribir, analizar, decidir.</p>
+    <div class="analogy">
+      <strong>Analogía:</strong> Un programa tradicional es como una receta de cocina — sigue pasos exactos. La IA es como un chef experimentado — ha cocinado miles de platos, reconoce sabores, y puede improvisar con lo que hay en la cocina.
+    </div>
+  </div>
+  <div class="wia-card">
+    <h3 style="color: var(--accent-orange);">¿Por qué importa AHORA?</h3>
+    <p>La IA existe desde los años 50, pero tres cosas cambiaron en los últimos 3 años:</p>
+    <p style="margin-top: 14px;"><strong style="color: var(--accent-orange);">1. Se volvió accesible.</strong> Ya no necesitas un equipo de científicos de datos. Herramientas como ChatGPT, Claude o Gemini permiten que cualquier persona use IA con solo escribir.</p>
+    <p style="margin-top: 10px;"><strong style="color: var(--accent-orange);">2. Entiende lenguaje natural.</strong> Puedes hablarle como a un colega: "analiza este reporte y dime los 3 riesgos principales". Antes tenías que programar cada instrucción.</p>
+    <p style="margin-top: 10px;"><strong style="color: var(--accent-orange);">3. Puede ACTUAR, no solo responder.</strong> Los agentes de IA (Agentic AI) ya pueden operar herramientas, navegar sistemas y completar tareas complejas de forma autónoma.</p>
+  </div>
+</div>
+
+<!-- TIPOS DE IA Y USOS EMPRESARIALES -->
+<div>
+  <div class="section-title">01 — Tipos de IA y usos empresariales</div>
+  <div class="section-heading">¿Qué tipos de IA existen y para qué sirven?</div>
+  <div class="section-sub">No toda la IA es igual. Estos son los 5 tipos que resuelven problemas diferentes en la empresa.</div>
+
+  <div class="ai-types-grid">
+
+    <div class="ai-type-card">
+      <div class="type-icon">💬</div>
+      <h4 style="color: var(--accent-cyan);">IA Generativa & Conversacional</h4>
+      <p>Crea contenido nuevo: texto, imágenes, código, presentaciones. Es la más visible hoy (ChatGPT, Claude, Midjourney). Puede operar en modo <strong>single-shot</strong> (un input → un output) o en modo <strong>conversacional</strong> (diálogo continuo con contexto, como chatbots y asistentes virtuales).</p>
+      <div class="use-cases">
+        <div class="use-case"><strong>Operaciones:</strong> Generar reportes, resúmenes ejecutivos, minutas</div>
+        <div class="use-case"><strong>Ventas:</strong> Redactar propuestas, emails personalizados</div>
+        <div class="use-case"><strong>Atención al cliente:</strong> Chatbots 24/7 con contexto, help desk inteligente</div>
+      </div>
+    </div>
+
+    <div class="ai-type-card">
+      <div class="type-icon">📊</div>
+      <h4 style="color: var(--accent-amber);">IA Predictiva</h4>
+      <p>Analiza datos históricos para predecir qué va a pasar. Usa modelos estadísticos y machine learning clásico.</p>
+      <div class="use-cases">
+        <div class="use-case"><strong>Supply Chain:</strong> Pronóstico de demanda, inventario óptimo</div>
+        <div class="use-case"><strong>Finanzas:</strong> Detección de fraude, scoring crediticio</div>
+        <div class="use-case"><strong>Mantenimiento:</strong> Predicción de fallas en equipos</div>
+      </div>
+    </div>
+
+    <div class="ai-type-card">
+      <div class="type-icon">👁️</div>
+      <h4 style="color: var(--accent-green);">IA de Visión</h4>
+      <p>Analiza imágenes y video. Detecta objetos, lee documentos escaneados, inspecciona calidad visual.</p>
+      <div class="use-cases">
+        <div class="use-case"><strong>Manufactura:</strong> Inspección de calidad automatizada</div>
+        <div class="use-case"><strong>Retail:</strong> Conteo de inventario por cámara</div>
+        <div class="use-case"><strong>Documentos:</strong> OCR inteligente de facturas y recibos</div>
+      </div>
+    </div>
+
+    <div class="ai-type-card">
+      <div class="type-icon">🤖</div>
+      <h4 style="color: var(--accent-orange);">IA Agentic</h4>
+      <p>Agentes que planifican, ejecutan, usan herramientas y completan tareas de forma autónoma. La frontera actual de la IA empresarial.</p>
+      <div class="use-cases">
+        <div class="use-case"><strong>Operaciones:</strong> Agente que procesa órdenes completas</div>
+        <div class="use-case"><strong>Finanzas:</strong> Agente que concilia y genera reportes</div>
+        <div class="use-case"><strong>Ventas:</strong> Agente que investiga prospects y genera propuestas</div>
+      </div>
+    </div>
+
+    <div class="ai-type-card">
+      <div class="type-icon">🔄</div>
+      <h4 style="color: var(--accent-pink);">IA de Optimización</h4>
+      <p>Encuentra la mejor solución entre miles de posibilidades. Ideal para problemas complejos con muchas variables.</p>
+      <div class="use-cases">
+        <div class="use-case"><strong>Logística:</strong> Ruteo óptimo de entregas</div>
+        <div class="use-case"><strong>Pricing:</strong> Precios dinámicos por segmento</div>
+        <div class="use-case"><strong>Planeación:</strong> Asignación óptima de recursos</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- QUICK REFERENCE: TENDENCIAS 2025-2026 -->
+<div class="insight-box" style="margin-bottom: 60px;">
+  <div class="label">🔥 Las 5 tendencias clave 2025-2026</div>
+  <p style="font-size: 20px; text-align: left; max-width: 900px; margin: 0 auto;">
+    <strong>1. De Copilot a Agente</strong> — La IA ya no solo asiste, sino que ejecuta tareas completas de forma autónoma.<br><br>
+    <strong>2. MCP como estándar</strong> — Los agentes se conectan a cualquier herramienta vía un protocolo universal (como USB para IA).<br><br>
+    <strong>3. IA sin infraestructura</strong> — Herramientas como Cowork y Computer Use permiten automatizar sin APIs ni integración previa.<br><br>
+    <strong>4. Multi-agente</strong> — Equipos de agentes especializados que colaboran: uno investiga, otro redacta, otro valida.<br><br>
+    <strong>5. Governance como prioridad</strong> — Las empresas que definan guardrails claros escalarán IA más rápido que las que no.
+  </p>
+</div>
+
+<!-- 10 CONCEPTOS CLAVE -->
+<div>
+  <div class="section-title">03 — Vocabulario esencial</div>
+  <div class="section-heading">10 Conceptos Clave de IA</div>
+  <div class="section-sub">Los términos que necesitas dominar para tener cualquier conversación sobre IA en la empresa.</div>
+
+  <div class="concepts-grid">
+
+    <div class="concept-card c-cyan">
+      <div class="concept-num">01</div>
+      <h4>LLM — Modelo de Lenguaje Grande</h4>
+      <div class="en-label">Large Language Model</div>
+      <div class="concept-desc">Es el "cerebro" detrás de ChatGPT, Claude, Gemini, etc. Un sistema entrenado con cantidades masivas de texto que aprendió a entender y generar lenguaje. Es el motor que hace posible todo lo demás.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Imagina alguien que ha leído todos los libros, artículos y manuales del mundo. No "sabe" todo, pero puede conversar sobre cualquier tema con contexto y matiz.</div>
+    </div>
+
+    <div class="concept-card c-orange">
+      <div class="concept-num">02</div>
+      <h4>Prompt — La Instrucción</h4>
+      <div class="en-label">Prompt / Prompt Engineering</div>
+      <div class="concept-desc">Es lo que tú le escribes a la IA. La calidad de tu prompt determina la calidad de la respuesta. "Prompt engineering" es el arte de dar instrucciones claras, con contexto y formato deseado.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Es como dar un brief a un consultor. Si le dices "hazme un reporte", te da algo genérico. Si le dices "hazme un reporte ejecutivo de 2 páginas comparando X vs Y con recomendación", te da exactamente lo que necesitas.</div>
+    </div>
+
+    <div class="concept-card c-green">
+      <div class="concept-num">03</div>
+      <h4>RAG — Retrieval Augmented Generation</h4>
+      <div class="en-label">Generación Aumentada por Recuperación</div>
+      <div class="concept-desc">Técnica para que la IA consulte TUS documentos antes de responder, en lugar de solo usar su conocimiento general. Es como darle acceso a tu base de conocimiento interna.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Sin RAG, la IA responde como un consultor externo que sabe mucho en general. Con RAG, es como ese consultor pero con acceso a todos los manuales, políticas y archivos de tu empresa.</div>
+    </div>
+
+    <div class="concept-card c-purple">
+      <div class="concept-num">04</div>
+      <h4>Tokens — La Unidad de Medida</h4>
+      <div class="en-label">Tokens / Context Window</div>
+      <div class="concept-desc">Un token es un fragmento de texto (~¾ de una palabra). El "context window" es cuántos tokens puede procesar la IA a la vez. Más tokens = puede leer documentos más largos y mantener conversaciones más extensas.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Si la IA fuera una persona en una reunión, el context window es su "memoria de trabajo" — cuánta información puede tener presente al mismo tiempo para tomar una decisión.</div>
+    </div>
+
+    <div class="concept-card c-amber">
+      <div class="concept-num">05</div>
+      <h4>Fine-tuning — Entrenamiento Especializado</h4>
+      <div class="en-label">Ajuste Fino</div>
+      <div class="concept-desc">Tomar un modelo general y re-entrenarlo con datos específicos de tu industria o empresa para que se especialice. Es costoso y complejo, pero produce modelos muy especializados.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Es como contratar a un médico general y mandarlo a una residencia de 3 años en cardiología. Sale más caro, pero para temas del corazón, no hay mejor opción.</div>
+    </div>
+
+    <div class="concept-card c-pink">
+      <div class="concept-num">06</div>
+      <h4>Agentic AI — Agentes Autónomos</h4>
+      <div class="en-label">AI Agents</div>
+      <div class="concept-desc">La IA que no solo responde, sino que ACTÚA. Un agente puede planificar pasos, usar herramientas (navegar web, operar apps, llamar APIs), tomar decisiones intermedias y completar tareas complejas de forma autónoma, dentro de límites definidos.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Un Copilot es como un asistente que te prepara un borrador para que tú actúes. Un Agente es como un empleado que tú le dices "resuelve esto" y regresa con el problema resuelto.</div>
+    </div>
+
+    <div class="concept-card c-cyan">
+      <div class="concept-num">07</div>
+      <h4>MCP — Model Context Protocol</h4>
+      <div class="en-label">Protocolo de Contexto del Modelo</div>
+      <div class="concept-desc">Un estándar creado por Anthropic que permite a la IA conectarse con herramientas externas (CRM, email, bases de datos, APIs) de forma segura y estandarizada. Es lo que habilita que un agente pueda "operar" tus sistemas.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> MCP es como un USB universal para la IA. Así como USB permite conectar cualquier dispositivo a tu computadora, MCP permite conectar cualquier herramienta a un agente de IA.</div>
+    </div>
+
+    <div class="concept-card c-orange">
+      <div class="concept-num">08</div>
+      <h4>Hallucination — Alucinación</h4>
+      <div class="en-label">AI Hallucination</div>
+      <div class="concept-desc">Cuando la IA genera información que suena convincente pero es incorrecta o inventada. Es el riesgo #1 de usar IA sin supervisión. Por eso los humanos deben validar outputs críticos.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Es como un empleado muy seguro de sí mismo que cuando no sabe la respuesta, en vez de decir "no sé", inventa algo que suena creíble. Por eso siempre hay que verificar.</div>
+    </div>
+
+    <div class="concept-card c-green">
+      <div class="concept-num">09</div>
+      <h4>Guardrails — Barreras de Seguridad</h4>
+      <div class="en-label">Safety Guardrails / Governance</div>
+      <div class="concept-desc">Reglas y límites que defines para que la IA opere de forma segura: qué puede y qué NO puede hacer, qué datos puede ver, cuándo debe escalar a un humano, y qué acciones requieren aprobación.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Es como darle una tarjeta de crédito corporativa a un empleado con límites de gasto, categorías restringidas y aprobación requerida arriba de cierto monto. Autonomía con control.</div>
+    </div>
+
+    <div class="concept-card c-purple">
+      <div class="concept-num">10</div>
+      <h4>Multi-Modal — Múltiples Formatos</h4>
+      <div class="en-label">Multimodal AI</div>
+      <div class="concept-desc">IA que no solo entiende texto, sino también imágenes, audio, video y documentos. Puedes subirle una foto de una factura, un audio de una reunión, o un PDF escaneado y lo procesa.</div>
+      <div class="concept-analogy"><strong>Analogía:</strong> Los modelos originales solo sabían "leer". Los multimodales saben leer, ver fotos, escuchar audio y ver video — como un asistente que entiende cualquier formato que le mandes.</div>
+    </div>
+
+  </div>
+</div>
+
+
+</div> <!-- end page-ai101 -->
+
+<!-- ============================================================ -->
+<!-- PAGE 3: IGSA — USE CASES IA EN FINANZAS Y ADMINISTRACIÓN -->
+<!-- ============================================================ -->
+<div id="page-igsa" class="page">
+
+<div class="hero">
+  <div class="badge">IGSA · Business Central · Administración y Finanzas</div>
+  <h1><span>Use Cases de IA</span><br>Finanzas y<br>Administración</h1>
+  <p>Oportunidades concretas para aplicar Copilots y Agentes de IA sobre los procesos<br>del mapa TO BE de IGSA en Business Central.</p>
+</div>
+
+<!-- SUMMARY STATS -->
+<div class="uc-summary-bar">
+  <div class="uc-stat">
+    <div class="stat-num" style="color: var(--accent-cyan);">7</div>
+    <div class="stat-label">Áreas analizadas</div>
+  </div>
+  <div class="uc-stat">
+    <div class="stat-num" style="color: var(--accent-orange);">20</div>
+    <div class="stat-label">Use cases identificados</div>
+  </div>
+  <div class="uc-stat">
+    <div class="stat-num" style="color: var(--accent-amber);">12</div>
+    <div class="stat-label">Copilot</div>
+  </div>
+  <div class="uc-stat">
+    <div class="stat-num" style="color: var(--accent-purple);">8</div>
+    <div class="stat-label">Agentic AI</div>
+  </div>
+</div>
+
+<div class="insight-box" style="margin-bottom: 50px;">
+  <div class="label">💡 Criterio de selección</div>
+  <p>Se priorizaron procesos donde el TO BE de Business Central <strong>ya mejora la operación</strong>, pero la IA puede<br>agregar una capa adicional: eliminar tareas manuales residuales, anticipar errores, o generar análisis automático.<br>Click en cada proceso para ver el detalle.</p>
+</div>
+
+<!-- ===================== CUENTAS POR PAGAR ===================== -->
+<div class="uc-area-section">
+  <div class="uc-area-header">
+    <div class="area-icon" style="background: rgba(255,107,43,0.1);">💰</div>
+    <div>
+      <h3 style="color: var(--accent-orange);">Cuentas por Pagar</h3>
+      <div style="font-size: 13px; color: var(--text-dim);">Registro, validación y pago a proveedores</div>
+    </div>
+    <div class="area-count">4 USE CASES</div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-orange);">P01</div>
+      <div class="uc-process-name">Registro facturas de proveedor sobre Pedidos de Compra<div class="uc-sub">Validación fiscal, retenciones, provisiones</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS — Dolor actual</div><div class="uc-content">Validación fiscal y manejo de retenciones con controles manuales fuera del ERP. Riesgo de retrabajo y ajustes al cierre.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE — Mejora BC</div><div class="uc-content">Cálculo automático de retenciones desde registro de factura. Provisión controlada para no inventariados.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de validación fiscal</div><div class="uc-content"><strong>Agente que recibe el XML/PDF del proveedor</strong>, valida automáticamente contra SAT (estatus CFDI, lista negra EFOS), cruza con el pedido de compra en BC, identifica discrepancias (montos, conceptos, retenciones), y pre-llena el registro. Solo escala al usuario cuando hay diferencias o requiere aprobación.<br><br><strong>Impacto:</strong> Elimina la validación manual factura por factura. Reduce tiempo de registro de ~15 min a ~2 min por factura.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude + MCP</span><span class="tool-tag">API SAT</span><span class="tool-tag">BC API</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">⏱ -85% TIEMPO</span><span class="uc-impact-tag">✅ CERO RETRABAJO FISCAL</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-orange);">P03</div>
+      <div class="uc-process-name">Generación de pagos<div class="uc-sub">Propuestas de pago por vencimiento y flujo de efectivo</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Programación de pagos con reportes y preparación manual para ejecución bancaria.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Propuesta automática por vencimiento y flujo de efectivo, validando divisas y cuentas bancarias.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de cash management + Agente de ejecución</div><div class="uc-content"><strong>Copilot:</strong> Analiza el flujo de efectivo proyectado y recomienda qué pagar hoy vs. diferir, priorizando por impacto en relación comercial, descuentos por pronto pago y liquidez disponible.<br><br><strong>Agente:</strong> Una vez aprobada la propuesta, genera el layout Santander, lo prepara para carga y notifica al tesorero. Monitorea la respuesta del banco y concilia automáticamente.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Copilot</span><span class="tool-tag">BC Payments API</span><span class="tool-tag">Santander Layout</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">💰 OPTIMIZACIÓN FLUJO</span><span class="uc-impact-tag">⏱ -70% PREP PAGOS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-orange);">P05</div>
+      <div class="uc-process-name">Validación transferencias Santander<div class="uc-sub">Desde solicitud hasta conciliación de pago</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Validación de estatus de aprobación y aplicación de transferencias manual.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Flujo automatizado request-to-pay directo en BC.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de conciliación de pagos</div><div class="uc-content"><strong>Agente que importa el archivo de respuesta de Santander</strong>, cruza cada transferencia con el pago registrado en BC, identifica rechazos o parciales, aplica automáticamente los exitosos y genera un reporte de excepciones con las acciones sugeridas para cada caso.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">Santander TXT</span><span class="tool-tag">BC API</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">⏱ -90% CONCILIACIÓN</span><span class="uc-impact-tag">🎯 0 PAGOS SIN APLICAR</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-orange);">P08</div>
+      <div class="uc-process-name">Emisión de reportes / análisis CxP<div class="uc-sub">Cartera por pagar, vencidos, proyecciones</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Análisis con reportes estándar de EPICOR + Excel y conciliaciones manuales.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Reporte de CxP por vencer y vencidas en BC.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de análisis de cartera</div><div class="uc-content"><strong>Copilot que responde preguntas en lenguaje natural</strong> sobre la cartera: "¿Cuánto vence esta semana?", "¿Cuáles son los top 5 proveedores con mayor saldo?", "Dame la proyección de pagos de los próximos 30 días". Genera resúmenes ejecutivos automáticos para el cierre semanal.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude + BC Data</span><span class="tool-tag">RAG sobre reportes</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">📊 ANÁLISIS EN SEGUNDOS</span><span class="uc-impact-tag">📝 REPORTES AUTO</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CUENTAS POR COBRAR ===================== -->
+<div class="uc-area-section">
+  <div class="uc-area-header">
+    <div class="area-icon" style="background: rgba(0,212,255,0.1);">📥</div>
+    <div>
+      <h3 style="color: var(--accent-cyan);">Cuentas por Cobrar</h3>
+      <div style="font-size: 13px; color: var(--text-dim);">Clientes, cobros, complementos de pago, anticipos</div>
+    </div>
+    <div class="area-count">4 USE CASES</div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-cyan);">C01</div>
+      <div class="uc-process-name">Alta de clientes — validación EFOS/EDOS<div class="uc-sub">Validación periódica contra listas SAT</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Crédito retenido hasta validación manual de documentación.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Validación periódica contra listas SAT con control de estatus en BC.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de compliance continuo</div><div class="uc-content"><strong>Agente que ejecuta validación automática diaria/semanal</strong> de toda la base de clientes y proveedores contra listas EFOS/EDOS del SAT. Cuando detecta un cambio de estatus, bloquea operaciones en BC y notifica inmediatamente a Crédito y Cobranza con el detalle y la acción recomendada.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">API SAT</span><span class="tool-tag">BC Webhooks</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">🛡️ COMPLIANCE CONTINUO</span><span class="uc-impact-tag">⚡ ALERTA EN MINUTOS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-cyan);">C03</div>
+      <div class="uc-process-name">Registro complemento de pago<div class="uc-sub">Identificación de pagos, aplicación y timbrado CFDI</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Identificación de pagos desde estado de cuenta manual. CFDI depende de validaciones manuales. Relación cobro-factura-complemento no está amarrada.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Automatización del registro, aplicación y timbrado del complemento con trazabilidad total.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de matching de cobros</div><div class="uc-content"><strong>Agente que lee el estado de cuenta bancario</strong>, identifica cada depósito por referencia/monto/cliente, lo cruza con facturas abiertas en BC, aplica el cobro, genera el complemento de pago y lo timbra. Solo escala cuando hay ambigüedad (pagos parciales, referencias no coincidentes, clientes con múltiples facturas del mismo monto).</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">Bank Statement</span><span class="tool-tag">PAC/SAT</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">⏱ -90% APLICACIÓN</span><span class="uc-impact-tag">🔗 TRAZABILIDAD 100%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-cyan);">C06</div>
+      <div class="uc-process-name">Gestión anticipos de venta<div class="uc-sub">Anticipo → Proyecto → Cobro → Factura final</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">No hay relación clara entre Anticipo → Proyecto → Cobro → Factura final. Control manual.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Gestión integral con planes de pago y amortización automática.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de seguimiento de anticipos</div><div class="uc-content"><strong>Copilot que monitorea el estatus de anticipos por proyecto:</strong> alerta cuando un anticipo lleva X días sin amortizar, notifica al equipo comercial cuando falta cobrar antes de liberar siguiente fase, y genera un dashboard en tiempo real del flujo Anticipo→Cobro→Factura por proyecto.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Copilot</span><span class="tool-tag">BC Projects</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">👁️ VISIBILIDAD TOTAL</span><span class="uc-impact-tag">⚡ ALERTAS PROACTIVAS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-cyan);">C08</div>
+      <div class="uc-process-name">Reportes / análisis CxC<div class="uc-sub">Cartera por cobrar, aging, priorización cobranza</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Visibilidad con reportes estándar + Excel y conciliaciones manuales.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Reporte ejecutivo de cartera por cobrar con vista por cliente, saldo, antigüedad.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de cobranza inteligente</div><div class="uc-content"><strong>Copilot que prioriza la gestión de cobranza:</strong> identifica los clientes con mayor riesgo de incumplimiento (historial de pago, aging, monto), genera borradores de correo de seguimiento personalizados por cliente, y produce el resumen semanal de cobranza para la junta directiva.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude + RAG</span><span class="tool-tag">BC CxC Data</span><span class="tool-tag">Email Draft</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">🎯 PRIORIZACIÓN AUTO</span><span class="uc-impact-tag">📧 FOLLOW-UP AUTO</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TESORERÍA ===================== -->
+<div class="uc-area-section">
+  <div class="uc-area-header">
+    <div class="area-icon" style="background: rgba(52,211,153,0.1);">🏦</div>
+    <div>
+      <h3 style="color: var(--accent-green);">Tesorería</h3>
+      <div style="font-size: 13px; color: var(--text-dim);">Bancos, conciliación, intercompañía, divisas</div>
+    </div>
+    <div class="area-count">2 USE CASES</div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-green);">T04</div>
+      <div class="uc-process-name">Gestión préstamos/cobros intercompañía<div class="uc-sub">Trazabilidad entre empresas del grupo</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Seguimiento operativo y contable manual de préstamos entre compañías.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Registro automático de transacciones intercompañía en BC.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de conciliación intercompañía</div><div class="uc-content"><strong>Copilot que cruza automáticamente los saldos intercompañía</strong> entre entidades, detecta discrepancias antes del cierre y genera el reporte de posición intercompañía consolidada. Responde preguntas como: "¿Cuánto le debe IGSA Industrial a IGSA Servicios?"</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude + BC Multi-entity</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">🔍 CRUCE AUTOMÁTICO</span><span class="uc-impact-tag">⏱ CIERRE MÁS RÁPIDO</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-green);">T06</div>
+      <div class="uc-process-name">Conciliación bancaria<div class="uc-sub">Matching banco vs. BC, ajustes, trazabilidad</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Conciliación semanal con matching y ajustes manuales.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Operación end-to-end con Santander: importación, matching automático y trazabilidad.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de conciliación inteligente</div><div class="uc-content"><strong>Agente que ejecuta la conciliación diaria:</strong> importa el estado de cuenta, aplica matching por reglas + IA (reconoce patrones de pagos recurrentes, comisiones, nombres de proveedores), resuelve el 95% automáticamente y presenta solo las partidas ambiguas al tesorero con 2-3 opciones de resolución.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">Santander API</span><span class="tool-tag">BC Reconciliation</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">⏱ DIARIA vs SEMANAL</span><span class="uc-impact-tag">🎯 95% AUTO-MATCH</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ACTIVOS FIJOS ===================== -->
+<div class="uc-area-section">
+  <div class="uc-area-header">
+    <div class="area-icon" style="background: rgba(167,139,250,0.1);">🏗️</div>
+    <div>
+      <h3 style="color: var(--accent-purple);">Activos Fijos</h3>
+      <div style="font-size: 13px; color: var(--text-dim);">Alta, depreciación, documentación, control</div>
+    </div>
+    <div class="area-count">2 USE CASES</div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-purple);">AF01</div>
+      <div class="uc-process-name">Creación activo fijo + documentación soporte<div class="uc-sub">Alta automática desde compra, con evidencias</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Alta manual. Documentación soporte en carpetas/correos fuera del ERP. Búsquedas manuales para auditoría.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Alta automática desde compra con fechas clave. Documentos adjuntos en ficha del activo.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de expediente de activos</div><div class="uc-content"><strong>Agente que al registrar una compra de activo fijo</strong>, automáticamente recopila la documentación asociada (factura XML, contrato, póliza de seguro desde email/Drive), la clasifica, la adjunta en la ficha del activo en BC, y valida que el expediente esté completo. Alerta si falta algún documento requerido.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">Email/Drive</span><span class="tool-tag">BC Attachments</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">📁 EXPEDIENTE AUTO</span><span class="uc-impact-tag">✅ AUDITORÍA READY</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-purple);">AF05</div>
+      <div class="uc-process-name">Depreciación activo fijo<div class="uc-sub">Cálculo automático por reglas, validación</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Validaciones y controles manuales, ajustes posteriores cuando hay cambios.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Depreciación automática con reglas por tipo/clase de activo.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de validación pre-cierre</div><div class="uc-content"><strong>Copilot que antes de ejecutar la depreciación mensual</strong>, revisa: activos nuevos sin configuración de depreciación, activos con vida útil cumplida que siguen depreciando, diferencias entre depreciación fiscal vs contable, y genera un checklist de validación para el controller.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Copilot</span><span class="tool-tag">BC Fixed Assets</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">🛡️ PRE-VALIDACIÓN</span><span class="uc-impact-tag">📋 CHECKLIST AUTO</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FACTURACIÓN ===================== -->
+<div class="uc-area-section">
+  <div class="uc-area-header">
+    <div class="area-icon" style="background: rgba(255,181,71,0.1);">🧾</div>
+    <div>
+      <h3 style="color: var(--accent-amber);">Facturación</h3>
+      <div style="font-size: 13px; color: var(--text-dim);">Emisión, multi-moneda, anticipos, servicios</div>
+    </div>
+    <div class="area-count">2 USE CASES</div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-amber);">F06</div>
+      <div class="uc-process-name">Facturación en divisa extranjera<div class="uc-sub">Multi-moneda, tipo de cambio, ajustes</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Validaciones manuales de tipo de cambio, ajustes posteriores por diferencias.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Parametrización multi-moneda con reglas de TC y emisión correcta.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de validación cambiaria</div><div class="uc-content"><strong>Copilot que antes de timbrar una factura en USD/EUR</strong>, valida que el tipo de cambio aplicado sea el correcto (DOF del día), alerta si hay diferencia significativa con el TC pactado al cliente, y proyecta el impacto de diferencias cambiarias acumuladas en el periodo.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Copilot</span><span class="tool-tag">API Banxico/DOF</span><span class="tool-tag">BC</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">💱 TC VALIDADO</span><span class="uc-impact-tag">📉 -DIFERENCIAS CAMBIARIAS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-amber);">F09</div>
+      <div class="uc-process-name">Facturación anticipos de venta<div class="uc-sub">Emisión, cobro, amortización contra factura final</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Control operativo manual. Riesgo de inconsistencias en saldos y conciliación.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Gestión end-to-end: emisión, cobro, amortización automática contra factura final.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot + Agente de ciclo de anticipos</div><div class="uc-content"><strong>Copilot:</strong> Dashboard que muestra en tiempo real qué anticipos están pendientes de amortizar por proyecto/cliente.<br><br><strong>Agente:</strong> Cuando se factura la entrega final, verifica automáticamente si hay anticipos pendientes, los amortiza, genera la factura neta correcta y timbra. Elimina el riesgo de facturar sin descontar anticipos.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">BC Sales</span><span class="tool-tag">PAC</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">🔗 AMORTIZACIÓN AUTO</span><span class="uc-impact-tag">🎯 SALDOS CORRECTOS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LOCALIZACIÓN FISCAL ===================== -->
+<div class="uc-area-section">
+  <div class="uc-area-header">
+    <div class="area-icon" style="background: rgba(244,114,182,0.1);">📋</div>
+    <div>
+      <h3 style="color: var(--accent-pink);">Localización Fiscal</h3>
+      <div style="font-size: 13px; color: var(--text-dim);">CFDI, DIOT, buzón proveedores, EFOS/EDOS</div>
+    </div>
+    <div class="area-count">3 USE CASES</div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-pink);">L07</div>
+      <div class="uc-process-name">Recepción CFDI de proveedor (buzón)<div class="uc-sub">Recepción, validación SAT, asociación</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Recepción y control manual. Descarga/validación fuera del sistema. Seguimiento en Excel/correos.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Buzón integrado en BC con validación automática SAT y trazabilidad del CFDI.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de buzón inteligente de proveedores</div><div class="uc-content"><strong>Agente que monitorea el buzón de email de facturas</strong>, descarga XMLs y PDFs, valida el CFDI contra SAT (estatus vigente, RFC correcto, UUID válido), extrae datos clave (monto, concepto, retenciones), lo asocia con la orden de compra correspondiente en BC, y alerta cuando hay discrepancias o CFDIs rechazados.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">Email MCP</span><span class="tool-tag">API SAT</span><span class="tool-tag">BC</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">📬 INBOX→BC AUTO</span><span class="uc-impact-tag">✅ VALIDACIÓN SAT 100%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-pink);">L08</div>
+      <div class="uc-process-name">Emisión de DIOT<div class="uc-sub">Reporte para SAT con cruces fiscales</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">DIOT con extracciones y cruces manuales (compras-IVA-proveedores). Validaciones en Excel. Retrabajo por datos incompletos.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Vista en BC con información consolidada (UUID, RFC, datos fiscales) exportable.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de pre-validación DIOT</div><div class="uc-content"><strong>Copilot que antes de generar la DIOT</strong>, cruza la información de BC contra los XMLs recibidos, detecta inconsistencias (RFCs no registrados, montos que no cuadran, tasas de IVA incorrectas), y genera un reporte de "salud fiscal" del periodo con las correcciones necesarias antes del envío.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude + RAG</span><span class="tool-tag">BC Fiscal Data</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">🛡️ CERO RECHAZOS SAT</span><span class="uc-impact-tag">📊 SALUD FISCAL AUTO</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-pink);">L10</div>
+      <div class="uc-process-name">Validación EFOS y EDOS<div class="uc-sub">Validación periódica clientes/proveedores vs SAT</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Validaciones periódicas manuales con consultas externas y control aparte.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Carga de listas SAT y control de estatus en BC para alertar/bloquear.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de monitoreo fiscal continuo</div><div class="uc-content"><strong>Agente que descarga las listas EFOS/EDOS actualizadas del SAT</strong> de forma programada, cruza contra toda la base de proveedores y clientes activos en BC, y cuando detecta un match: bloquea el proveedor/cliente, notifica a compliance, y genera el expediente de evidencia automáticamente.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">SAT Listas</span><span class="tool-tag">BC</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">🛡️ MONITOREO 24/7</span><span class="uc-impact-tag">⚡ BLOQUEO INMEDIATO</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CONTABILIDAD ===================== -->
+<div class="uc-area-section">
+  <div class="uc-area-header">
+    <div class="area-icon" style="background: rgba(0,212,255,0.1);">📚</div>
+    <div>
+      <h3 style="color: var(--accent-cyan);">Contabilidad</h3>
+      <div style="font-size: 13px; color: var(--text-dim);">Pólizas, dimensiones, cierre, presupuestos, valuación</div>
+    </div>
+    <div class="area-count">3 USE CASES</div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-cyan);">CT11</div>
+      <div class="uc-process-name">Registro de pólizas manuales<div class="uc-sub">Asientos en diario general, validación, evidencia</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Alta dependencia de captura manual. Revisión operativa para asegurar consistencia y evidencia.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Plantillas estandarizadas con validaciones obligatorias antes de contabilizar.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de validación contable</div><div class="uc-content"><strong>Copilot que revisa cada póliza manual antes de contabilizar:</strong> verifica que cuadre débito/crédito, valida que las dimensiones sean correctas, detecta cuentas inusuales para el tipo de movimiento, y compara con pólizas similares de meses anteriores para identificar anomalías.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Copilot</span><span class="tool-tag">BC Journal</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">🛡️ PRE-VALIDACIÓN</span><span class="uc-impact-tag">🔍 DETECCIÓN ANOMALÍAS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-cyan);">CT18</div>
+      <div class="uc-process-name">Pólizas recurrentes<div class="uc-sub">Rentas, seguros, provisiones mensuales</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span><span class="uc-ai-badge agentic">AGENTE</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Gestión con plantillas/recordatorios manuales. Riesgo de omisiones.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Pólizas recurrentes automatizadas con programación y reglas contables.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Agente de cierre automatizado</div><div class="uc-content"><strong>Copilot:</strong> Pre-cierre que genera checklist mensual: "Estas 12 pólizas recurrentes se van a ejecutar — ¿confirmas?"<br><br><strong>Agente:</strong> Una vez confirmado, ejecuta todas las pólizas recurrentes, valida que contabilizaron correctamente, y genera el reporte de provisiones del mes con comparativo vs mes anterior.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude Agent</span><span class="tool-tag">BC Recurring Journals</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">⏱ CIERRE -50%</span><span class="uc-impact-tag">✅ 0 OMISIONES</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="uc-card" onclick="this.classList.toggle('open')">
+    <div class="uc-card-header">
+      <div class="uc-process-num" style="color: var(--accent-cyan);">CT19</div>
+      <div class="uc-process-name">Presupuestos contables<div class="uc-sub">Real vs presupuesto por cuenta y dimensión</div></div>
+      <div class="uc-ai-badges"><span class="uc-ai-badge copilot">COPILOT</span></div>
+    </div>
+    <div class="uc-card-body">
+      <div class="uc-grid">
+        <div class="uc-block as-is"><div class="uc-block-label">AS IS</div><div class="uc-content">Presupuesto en Excel sin comparativo automático vs real.</div></div>
+        <div class="uc-block to-be"><div class="uc-block-label">TO BE</div><div class="uc-content">Presupuesto en BC con comparativos Real vs Presupuesto por cuenta/dimensión.</div></div>
+        <div class="uc-block ai-opp"><div class="uc-block-label">🤖 Oportunidad IA — Copilot de análisis presupuestal</div><div class="uc-content"><strong>Copilot que genera análisis de variaciones automático:</strong> "El gasto en viáticos superó el presupuesto en 23% este mes — los centros de costo con mayor desviación son X y Y". Responde preguntas como "¿Cómo vamos vs presupuesto en el proyecto Z?" y proyecta tendencias de cierre anual.</div>
+          <div class="uc-tool-row"><span class="tool-tag">Claude + RAG</span><span class="tool-tag">BC Budgets</span></div>
+          <div class="uc-impact"><span class="uc-impact-tag">📊 VARIACIONES AUTO</span><span class="uc-impact-tag">🔮 PROYECCIÓN CIERRE</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING INSIGHT -->
+<div class="insight-box" style="margin-bottom: 60px;">
+  <div class="label">🚀 La oportunidad</div>
+  <p style="font-size: 20px; text-align: left; max-width: 900px; margin: 0 auto;">
+    Con Business Central como base, IGSA ya tendrá procesos estandarizados y datos estructurados.<br><br>
+    La capa de IA no reemplaza la implementación de BC — <strong>la potencia</strong>. Cada proceso que hoy se mejora con configuración o integración es un candidato para agregar un Copilot que asista o un Agente que ejecute.<br><br>
+    <strong>El siguiente paso:</strong> Priorizar 3-5 use cases de alto impacto para un piloto de 4-6 semanas post-implementación de BC.
+  </p>
+</div>
+
+<div class="footer">
+  <img src="https://londoncg.com/hs-fs/hubfs/Logo4%20(1).png?width=180&height=71&name=Logo4%20(1).png" alt="London Consulting Group" style="height: 32px; filter: brightness(1.1); margin-bottom: 16px;">
+  <p>LONDON CONSULTING GROUP · AI Roadmap · Automatización de Procesos y Decisiones · 2026</p>
+</div>
+
+</div>
+
+<script>
+function showPage(pageId, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
