@@ -4,11 +4,10 @@ This file provides context for AI assistants working on the `lcg-ai-roadmap` rep
 
 ## Project Overview
 
-A self-contained, single-file interactive HTML presentation built for **London Consulting Group (LCG)**. It visualizes an AI adoption roadmap for enterprise clients, covering digital maturity levels, AI automation layers, and concrete use cases for Finance & Administration teams migrating to Microsoft Business Central.
+A self-contained, single-file interactive HTML presentation built for **London Consulting Group (LCG)**. It visualizes an AI adoption roadmap for enterprise clients, covering digital maturity levels, AI automation layers, and concrete AI use cases for Finance & Administration teams.
 
 - **Language**: Spanish (es)
 - **Audience**: C-level and non-technical decision makers
-- **Client context**: IGSA — a company implementing Business Central with LCG guidance
 - **Branding**: LCG Digital · 2026
 
 ---
@@ -43,7 +42,7 @@ The app has **three pages** toggled via a sticky navigation bar. Only one page i
 |-----|---------|-------|
 | 01 | `page-roadmap` | AI Roadmap — Automatización de Procesos y Decisiones |
 | 02 | `page-ai101` | ¿Qué es la IA? (AI 101 for non-technical audiences) |
-| 03 | `page-igsa` | IGSA — Use Cases IA en Finanzas y Administración |
+| 03 | `page-igsa` | Use Cases IA en Finanzas y Administración |
 
 Navigation is handled by a single JS function:
 
@@ -106,7 +105,7 @@ Defined in `:root` (line 9):
 | `.matrix-row` | Single row in the matrix grid |
 | `.matrix-cell` | Individual cell in the matrix |
 | `.level-badge` | Vertical sidebar level label (N0–N4) |
-| `.uc-area-section` | Use case group (Page 3, IGSA) |
+| `.uc-area-section` | Use case group (Page 3) |
 | `.uc-card` | Collapsible use case card (click to expand) |
 | `.uc-ai-badge` | AI type tag: `.copilot`, `.agentic`, `.multi` |
 | `.tool-tag` | Technology tag chip |
@@ -158,27 +157,13 @@ Non-technical guide for decision makers. Covers:
 4. 5 key trends 2025–2026
 5. 10 key AI concepts (LLM, Prompt, RAG, Tokens, Fine-tuning, Agentic AI, MCP, Hallucination, Guardrails, Multimodal)
 
-### Page 3 — IGSA Use Cases (`page-igsa`)
+### Page 3 — Use Cases (`page-igsa`)
 
-AI use case catalog for IGSA's Business Central implementation:
-
-**Summary**: 7 areas, 20 use cases, 12 Copilot, 8 Agentic AI
-
-| Area | Count | Color |
-|------|-------|-------|
-| Cuentas por Pagar | 4 | Orange |
-| Cuentas por Cobrar | 4 | Cyan |
-| Tesorería | 2 | Green |
-| Activos Fijos | 2 | Purple |
-| Facturación | 2 | Amber |
-| Localización Fiscal | 3 | Pink |
-| Contabilidad | 3 | Cyan |
-
-Each use case card (`.uc-card`) is **click-to-expand** (toggles `.open` class) and shows:
+AI use case catalog for Finance & Administration teams. Each use case card (`.uc-card`) is **click-to-expand** (toggles `.open` class) and shows:
 - Process number (P01, C01, T01, etc.)
 - Process name + subtitle
 - AI type badge (COPILOT / AGENTE)
-- AS IS (current pain), TO BE (BC improvement), AI Opportunity (specific implementation)
+- AS IS (current pain), TO BE (improvement), AI Opportunity (specific implementation)
 - Tool tags and impact metrics
 
 ---
@@ -257,11 +242,6 @@ No other external dependencies. No npm packages, no CDN JS libraries.
 ## Key Business Context
 
 - **LCG** = London Consulting Group — management consulting firm
-- **IGSA** = Client company implementing Microsoft Business Central (ERP)
-- **BC** = Business Central (Microsoft ERP)
-- **SAT** = Mexican tax authority (Servicio de Administración Tributaria)
-- **CFDI** = Mexican electronic invoice format
-- **EFOS/EDOS** = SAT blacklists of tax fraud entities
 - **MCP** = Model Context Protocol (Anthropic standard for AI tool connectivity)
 - **Cowork** = AI automation tool mentioned for desktop/file operations
 - **Computer Use** = Claude's computer control capability
